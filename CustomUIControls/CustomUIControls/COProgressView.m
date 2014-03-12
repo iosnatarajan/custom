@@ -11,6 +11,14 @@
     if (self) 
     {
         // Initialization code
+        
+        self.clipsToBounds = YES;
+        
+        self.layer.cornerRadius = frame.size.height/2;
+        
+        self.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        self.layer.borderWidth = 0.5;
     }
     
     return self;
@@ -33,7 +41,11 @@
 }
 
 - (void)drawRect:(CGRect)rect
-{                    
+{
+    CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), self.backgroundColor.CGColor);
+    
+    CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
+
     CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(), self.progColor.CGColor);
     
     CGContextFillRect(UIGraphicsGetCurrentContext(), self.drawRect);

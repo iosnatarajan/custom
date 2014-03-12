@@ -352,27 +352,34 @@
 
 -(void)updateTipView
 {
-    CGRect labFrame = CGRectMake(_leftPadding, (_tipDown)?_tipHeight + _topPadding:_topPadding, self.frame.size.width - (_leftPadding + _rightPadding), _tipLabel.frame.size.height);;
+    if (_tipLabel.text.length)
+    {
+        CGRect labFrame = CGRectMake(_leftPadding, (_tipDown)?_tipHeight + _topPadding:_topPadding, self.frame.size.width - (_leftPadding + _rightPadding), _tipLabel.frame.size.height);
         
-    CGSize size = [_tipLabel.text sizeWithFont:_tipLabel.font constrainedToSize:CGSizeMake(labFrame.size.width, CGFLOAT_MAX)];
-    
-    labFrame.size.width = size.width;
-    
-    labFrame.size.height = size.height;
-    
-    _tipLabel.frame = labFrame;
-    
-    [_tipLabel sizeToFit];
-    
-    CGRect frame = self.frame;
-    
-    frame.size.width = _tipLabel.frame.size.width + _leftPadding + _rightPadding;
-    
-    frame.size.height = _tipLabel.frame.size.height + _topPadding + _bottomPadding + _tipHeight + _shadowHeight;
-    
-    self.frame = frame;    
-    
-    [self setNeedsDisplay];
+        NSLog(@"labFrame :%@", NSStringFromCGRect(labFrame));
+        
+        CGSize size = [_tipLabel.text sizeWithFont:_tipLabel.font constrainedToSize:CGSizeMake(labFrame.size.width, CGFLOAT_MAX)];
+        
+        NSLog(@"size :%@", NSStringFromCGSize(size));
+        
+        labFrame.size.width = size.width;
+        
+        labFrame.size.height = size.height;
+        
+        _tipLabel.frame = labFrame;
+        
+        [_tipLabel sizeToFit];
+
+        CGRect frame = self.frame;
+        
+        frame.size.width = _tipLabel.frame.size.width + _leftPadding + _rightPadding;
+        
+        frame.size.height = _tipLabel.frame.size.height + _topPadding + _bottomPadding + _tipHeight + _shadowHeight;
+        
+        self.frame = frame;
+        
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)dealloc

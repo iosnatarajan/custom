@@ -16,11 +16,17 @@
     {
         // Initialization code
         
-        sliderView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, frame.size.height - 20, 20.0, 20.0)];
+        sliderView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, frame.size.height - ((frame.size.width > frame.size.height)?frame.size.height:frame.size.width), (frame.size.width > frame.size.height)?frame.size.height:frame.size.width, (frame.size.width > frame.size.height)?frame.size.height:frame.size.width)];
         
         sliderView.userInteractionEnabled = YES;
         
-        sliderView.backgroundColor = [UIColor whiteColor];
+        sliderView.clipsToBounds = YES;
+        
+        sliderView.layer.borderWidth = 0.2;
+        
+        sliderView.layer.borderColor = [UIColor darkGrayColor].CGColor;
+        
+        sliderView.backgroundColor = [UIColor greenColor];
         
         UIPanGestureRecognizer *panGestureImg = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetectedSlider:)];
         
@@ -48,7 +54,7 @@
         
         [self setType:_type];
         
-        [self setValue:5.0];
+        [self setValue:0.0];
     }
     
     return self;
@@ -80,12 +86,17 @@
         float witdh = (_value/(_maxValue - _minValue)) * self.bounds.size.width;
         
         _drawRect =  CGRectMake(0.0, 5.0, witdh, _slideHeight);
+        
+        sliderView.layer.cornerRadius = sliderView.frame.size.height/2;
+
     }
     else if (_type == sliderTypeVertical)
     {
         float height = ((_value/(_maxValue - _minValue)) * self.bounds.size.height);
         
         _drawRect =  CGRectMake(5.0, self.bounds.size.height - height, _slideWidth, height);
+        
+        sliderView.layer.cornerRadius = sliderView.frame.size.width/2;
     }
     
     [self setNeedsDisplay];
@@ -138,8 +149,17 @@
             sliderView.center = imageViewPosition;
                         
             [panRecognizer setTranslation:CGPointZero inView:self];
-
         }
+        
+        if (_type == sliderTypeHorizontal)
+        {
+            [self setValue:(sliderView.center.x/self.bounds.size.width) * (_maxValue - _minValue)];
+        }
+        else
+        {
+            [self setValue:((self.frame.size.height - sliderView.center.y)/self.bounds.size.height) * (_maxValue - _minValue)];
+        }
+
      }
     else if([panRecognizer state] == UIGestureRecognizerStateCancelled || [panRecognizer state] == UIGestureRecognizerStateFailed || [panRecognizer state] == UIGestureRecognizerStateEnded)
     {

@@ -24,7 +24,7 @@
 		D87939AC16677BC300AF57EB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87939AA16677BC300AF57EB /* ViewController.xib */; };
 		D87939B316677C2000AF57EB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87939B216677C2000AF57EB /* QuartzCore.framework */; };
 		D87939C51667A64800AF57EB /* COSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D87939C41667A64800AF57EB /* COSwitch.m */; };
-		D8C8A7F416E9FEDA00D272DD /* COMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C8A7EF16E9FEDA00D272DD /* COMessageView.m */; };
+		D87B951E18D0650400BBA8C3 /* CustomController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B951D18D0650400BBA8C3 /* CustomController.m */; };
 		D8C8A7F516E9FEDA00D272DD /* COTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C8A7F116E9FEDA00D272DD /* COTipView.m */; };
 		D8C8A7F616E9FEDA00D272DD /* COProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C8A7F316E9FEDA00D272DD /* COProgressView.m */; };
 		D8E91A31171F1EA10099EB34 /* COSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E91A30171F1EA10099EB34 /* COSlider.m */; };
@@ -54,8 +54,8 @@
 		D87939B216677C2000AF57EB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D87939C31667A64800AF57EB /* COSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSwitch.h; sourceTree = "<group>"; };
 		D87939C41667A64800AF57EB /* COSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSwitch.m; sourceTree = "<group>"; };
-		D8C8A7EE16E9FEDA00D272DD /* COMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMessageView.h; sourceTree = "<group>"; };
-		D8C8A7EF16E9FEDA00D272DD /* COMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COMessageView.m; sourceTree = "<group>"; };
+		D87B951C18D0650400BBA8C3 /* CustomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomController.h; sourceTree = "<group>"; };
+		D87B951D18D0650400BBA8C3 /* CustomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomController.m; sourceTree = "<group>"; };
 		D8C8A7F016E9FEDA00D272DD /* COTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COTipView.h; sourceTree = "<group>"; };
 		D8C8A7F116E9FEDA00D272DD /* COTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COTipView.m; sourceTree = "<group>"; };
 		D8C8A7F216E9FEDA00D272DD /* COProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COProgressView.h; sourceTree = "<group>"; };
@@ -115,10 +115,10 @@
 				D879399F16677BC300AF57EB /* AppDelegate.m */,
 				D87939A716677BC300AF57EB /* ViewController.h */,
 				D87939A816677BC300AF57EB /* ViewController.m */,
+				D87B951C18D0650400BBA8C3 /* CustomController.h */,
+				D87B951D18D0650400BBA8C3 /* CustomController.m */,
 				D87939C31667A64800AF57EB /* COSwitch.h */,
 				D87939C41667A64800AF57EB /* COSwitch.m */,
-				D8C8A7EE16E9FEDA00D272DD /* COMessageView.h */,
-				D8C8A7EF16E9FEDA00D272DD /* COMessageView.m */,
 				D8C8A7F016E9FEDA00D272DD /* COTipView.h */,
 				D8C8A7F116E9FEDA00D272DD /* COTipView.m */,
 				D8C8A7F216E9FEDA00D272DD /* COProgressView.h */,
@@ -221,9 +221,9 @@
 			files = (
 				D879399C16677BC300AF57EB /* main.m in Sources */,
 				D87939A016677BC300AF57EB /* AppDelegate.m in Sources */,
+				D87B951E18D0650400BBA8C3 /* CustomController.m in Sources */,
 				D87939A916677BC300AF57EB /* ViewController.m in Sources */,
 				D87939C51667A64800AF57EB /* COSwitch.m in Sources */,
-				D8C8A7F416E9FEDA00D272DD /* COMessageView.m in Sources */,
 				D8C8A7F516E9FEDA00D272DD /* COTipView.m in Sources */,
 				D8C8A7F616E9FEDA00D272DD /* COProgressView.m in Sources */,
 				D8E91A31171F1EA10099EB34 /* COSlider.m in Sources */,

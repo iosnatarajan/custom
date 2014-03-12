@@ -6,6 +6,8 @@
 
 #import "COSlider.h"
 
+#import "CustomController.h"
+
 @interface ViewController ()
 
 @end
@@ -15,71 +17,99 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    COSwitch * swi = [[COSwitch alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2 - 100.0), 20, 200.0, 50.0)];
-//    
-//    swi.isOn = NO;
-//    
-//    [swi addTarget:self selector:@selector(switchStatus:)];
-//    
-//    [self.view addSubview:swi];
-    
-    squareView = [[UIView alloc] initWithFrame:CGRectMake(100.0, 340.0, 30.0, 30.0)];
-    
-    squareView.backgroundColor = [UIColor redColor];
-    
-    squareView.layer.cornerRadius = 5.0;
-    
-    [self.view addSubview:squareView];
-    
-    UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 320.0)];
-    
-    icon.backgroundColor = [UIColor whiteColor];
-    
-    [icon addTarget:self action:@selector(animate:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:icon];
-    
-    icon = nil;
+}
 
-//    COTipView * tipView = [[COTipView alloc] initWithFrame:CGRectMake(110.0, 100.0, 100.0, 100.0)];
-//    
-//    [tipView setText:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAA AAAAAAAAAAAA AAAAAAAA"];
-//    
-//    tipView.tag = 454;
-//    
-//    [self.view addSubview:tipView];
-//    
-//    tipView = nil;
+- (CGFloat)topOfViewOffset
+{
+    CGFloat top = 0;
     
-    /*
+    if ([self respondsToSelector:@selector(topLayoutGuide)])
+    {
+        top = self.topLayoutGuide.length;
+    }
     
-    COSlider * coSlider = [[COSlider alloc] initWithFrame:CGRectMake(20.0, 100.0, 30.0, 200.0)];
+    return top;
+}
+
+- (CGFloat)bottomOfViewOffset
+{
+    CGFloat bottom = 0;
     
-    coSlider.type = sliderTypeVertical;
+    if ([self respondsToSelector:@selector(bottomLayoutGuide)])
+    {
+        bottom = self.bottomLayoutGuide.length;
+    }
     
-    [self.view addSubview:coSlider];
+    return bottom;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    float topHeight = [self topOfViewOffset];
     
-    coSlider = nil;
-     */
+    controls = [[NSMutableArray alloc] initWithObjects:@"Custom Switch", @"Custom Tip View", @"Custom Progress View", @"Custom Slider View", nil];
     
-//    UISlider * slider = [[UISlider alloc] initWithFrame:CGRectMake(30.0, 200.0, 200.0, 6.0)];
-//    
-//    slider.maximumValue = 5.0;
-//    
-//    slider.minimumValue = 1.0;
-//    
-//    UIImage *sliderMinimum = [[UIImage imageNamed:@"maxtrack-layer.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:0];
-//    
-//    [slider setMinimumTrackImage:sliderMinimum forState:UIControlStateNormal];
-//    
-//    UIImage *sliderMaximum = [[UIImage imageNamed:@"mintrack-layer.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:0];
-//    
-//    [slider setMaximumTrackImage:sliderMaximum forState:UIControlStateNormal];
-//    
-//    [self.view addSubview:slider];
-//    
-//    slider = nil;
+    CGRect frame = self.view.frame;
+    
+    frame.origin.y = topHeight;
+    
+    frame.size.height -= topHeight;
+    
+    UITableView * table = [[UITableView alloc] initWithFrame:frame];
+    
+    table.delegate = self;
+    
+    table.dataSource = self;
+    
+    [self.view addSubview:table];
+    
+    table = Nil;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return controls.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40.0;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * cellID = @"CellID";
+    
+    UITableViewCell * cell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    
+    cell.textLabel.text = [controls objectAtIndex:indexPath.row];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    CustomController * controller = [[CustomController alloc] init];
+    
+    controller.type = indexPath.row;
+    
+    controller.controlName = [controls objectAtIndex:indexPath.row];
+    
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 -(void)animate:(UIButton *)icon
@@ -147,12 +177,7 @@
     NSLog(@"animationDidStop");
 }
 
--(void)switchStatus:(id)sender
-{
-    NSLog(@"Sender status is:%d",[sender isOn]);
-    
-    [[self.view viewWithTag:454] setHidden:![sender isOn]];
-}
+
 
 - (void)didReceiveMemoryWarning
 {
